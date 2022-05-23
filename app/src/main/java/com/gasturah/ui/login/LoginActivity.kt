@@ -13,12 +13,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
+        setupView()
     }
 
     private fun setupView() {
-
+        supportActionBar?.hide()
     }
 
     private fun setupAnimation() {
