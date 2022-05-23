@@ -12,4 +12,8 @@
     <string name="tv_login_desc">Welcome to Gasturah</string>
     <string name="tv_password">Password</string>
     <string name="btn_login">Login</string>
+    <string name="tv_register">Register</string>
+    <string name="tv_register_desc">Please fill in your personal data below</string>
+    <string name="btn_register">Register</string>
+    <string name="tv_username">Username</string>
 </resources>
