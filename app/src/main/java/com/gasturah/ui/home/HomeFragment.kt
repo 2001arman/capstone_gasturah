@@ -1,13 +1,16 @@
 package com.gasturah.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gasturah.databinding.FragmentHomeBinding
+import com.gasturah.ui.login.LoginActivity
 
 class HomeFragment : Fragment() {
 
@@ -32,6 +35,13 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
+
+        // Navigate to LoginPage. Well, ignore it. for testing purpose
+//        val button: Button = binding.button
+//        button.setOnClickListener{
+//            val moveToLogin = Intent(context, LoginActivity::class.java)
+//            startActivity(moveToLogin)
+//        }
         return root
     }
 

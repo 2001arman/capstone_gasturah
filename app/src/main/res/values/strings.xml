@@ -7,4 +7,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
+    <string name="tv_login">Login</string>
+    <string name="tv_email">Email</string>
+    <string name="tv_login_desc">Welcome to Gasturah</string>
+    <string name="tv_password">Password</string>
+    <string name="btn_login">Login</string>
 </resources>
