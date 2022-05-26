@@ -16,4 +16,5 @@
     <string name="tv_register_desc">Please fill in your personal data below</string>
     <string name="btn_register">Register</string>
     <string name="tv_username">Username</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
