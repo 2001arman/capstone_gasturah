@@ -12,6 +12,22 @@
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_notifications.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_profile.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
+        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.196" />
+        <entry key="app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.196" />
+        <entry key="app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.207" />
+        <entry key="app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.196" />
+        <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.196" />
+        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.196" />
+        <entry key="app/src/main/res/drawable/my_button.xml" value="0.202" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.17346014492753623" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.17346014492753623" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.17346014492753623" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.17346014492753623" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.17346014492753623" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17346014492753623" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17346014492753623" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.17346014492753623" />
       </map>
     </option>
   </component>
