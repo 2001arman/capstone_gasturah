@@ -17,4 +17,6 @@
     <string name="btn_register">Register</string>
     <string name="tv_username">Username</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="lawangsewu_description">Lawang Sewu adalah gedung bersejarah milik PT Kereta Api Indonesia (Persero) yang awalnya digunakan sebagai Kantor Pusat perusahaan kereta api swasta Nederlandsch-Indische Spoorweg Maatschappij (NISM). Gedung Lawang Sewu dibangun secara bertahap di atas lahan seluas 18.232 m2. Bangunan utama dimulai pada 27 Februari 1904 dan selesai pada Juli 1907. Sedangkan bangunan tambahan dibangun sekitar tahun 1916 dan selesai tahun 1918.\n \n Bangunannya dirancang oleh Prof. Jakob F. Klinkhamer dan B.J. Ouendag, arsitek dari Amsterdam dengan ciri dominan berupa elemen lengkung dan sederhana. Bangunan di desain menyerupai huruf L serta memiliki jumlah jendela dan pintu yang banyak sebagai sistem sirkulasi udara. Karena jumlah pintunya yang banyak maka masyarakat menamainya dengan Lawang Sewu yang berarti seribu pintu.</string>
+    <string name="lawangsewu_sumber">sumber : https://heritage.kai.id/page/lawang-sewu</string>
 </resources>
