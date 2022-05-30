@@ -22,4 +22,6 @@
     <string name="title_maps">Maps</string>
     <string name="search_sites">Search Sites</string>
     <string name="current_location">Current Location</string>
+    <string name="where_are_you_going_today">Where Are You Going Today?</string>
+    <string name="search">Search</string>
 </resources>

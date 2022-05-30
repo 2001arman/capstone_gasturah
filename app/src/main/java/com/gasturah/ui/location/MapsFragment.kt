@@ -1,51 +1,54 @@
 package com.gasturah.ui.location
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
-import android.location.Location
-import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.gasturah.MainActivity
 import com.gasturah.R
-import com.gasturah.databinding.FragmentHomeBinding
 import com.gasturah.databinding.FragmentMapsBinding
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
 import java.util.concurrent.Executors
 
+
 class MapsFragment : Fragment() {
-    private val executor = Executors.newSingleThreadExecutor()
-    private val handler = Handler(Looper.getMainLooper())
 
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
 
+    private val executor = Executors.newSingleThreadExecutor()
+    private val handler = Handler(Looper.getMainLooper())
+
+    private val requestLocation = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            Toast.makeText(this.requireContext(), "Please Allow Location", Toast.LENGTH_SHORT).show()
+            requestLocation()
+        }
+    }
+
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
         getMyLocation(googleMap)
         setupAction(googleMap)
     }
@@ -56,58 +59,55 @@ class MapsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        return root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        requestLocation()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
 
     private fun setupAction(mMap: GoogleMap) {
-        binding.mapsSearchEdit.setOnClickListener {
-            binding.mapsSearchEdit.onActionViewExpanded()
-        }
-        binding.mapsSearchEdit.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+
+        val bottomSheetLayout       = binding.includeBottomLayout.bottomSheet
+        val bottomSheetBehavior     = BottomSheetBehavior.from(bottomSheetLayout)
+        val searchArea              = bottomSheetLayout.findViewById<SearchView>(R.id.maps_search_edit)
+
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                bottomSheetBehavior.peekHeight = 240
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+               bottomSheetBehavior.peekHeight = 240
+                closeKeyboard()
+            }
+
+        })
+
+        searchArea.setOnClickListener({
+            bottomSheetBehavior.state   = BottomSheetBehavior.STATE_EXPANDED
+            searchArea.onActionViewExpanded()
+        })
+
+        searchArea.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String): Boolean {
                 executor.execute {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                     searchLocation(p0, mMap)
                 }
                 return false
             }
-
             override fun onQueryTextChange(p0: String): Boolean {
                 return false
             }
         })
-//        binding.btnCurrentLocation.setOnClickListener() {
-//            if (ActivityCompat.checkSelfPermission(
-//                    this,
-//                    Manifest.permission.ACCESS_FINE_LOCATION
-//                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                    this,
-//                    Manifest.permission.ACCESS_COARSE_LOCATION
-//                ) != PackageManager.PERMISSION_GRANTED
-//            ) {
-//                // TODO: Consider calling
-//                //    ActivityCompat#requestPermissions
-//                // here to request the missing permissions, and then overriding
-//                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                //                                          int[] grantResults)
-//                // to handle the case where the user grants the permission. See the documentation
-//                // for ActivityCompat#requestPermissions for more details.
-//                return@setOnClickListener
-//            }
-//            mFusedLocationClient.lastLocation.addOnCompleteListener(this) { task ->
-//                val location: Location? = task.result
-//                val currentLocation = LatLng(location!!.latitude, location!!.longitude)
-//                mMap.clear()
-//                mMap.addMarker(MarkerOptions().position(currentLocation))
-//                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 16F))
-//            }
-//        }
+    }
+
+    private fun requestLocation() {
+        requestLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
     private fun getMyLocation(mMap: GoogleMap) {
@@ -117,14 +117,6 @@ class MapsFragment : Fragment() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             mMap.isMyLocationEnabled = true
-        } else {
-            registerForActivityResult(
-                ActivityResultContracts.RequestPermission()
-            ) { isGranted: Boolean ->
-                if (isGranted) {
-                    getMyLocation(mMap)
-                }
-            }
         }
     }
 
@@ -145,10 +137,20 @@ class MapsFragment : Fragment() {
                 } else {
                     val address = addressList[0]
                     val latLng  = LatLng(address.latitude, address.longitude)
-                    mMap.addMarker(MarkerOptions().position(latLng).title(location))
+                    mMap.addMarker(MarkerOptions().position(latLng).title(location).snippet(address.getAddressLine(0)))
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
                 }
             }
+        }
+    }
+
+    fun closeKeyboard() {
+        val activity = activity as MainActivity
+
+        val view = activity.currentFocus
+        if (view != null) {
+            val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
         }
     }
 
