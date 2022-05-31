@@ -15,11 +15,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.gasturah.MainActivity
 import com.gasturah.R
 import com.gasturah.databinding.FragmentMapsBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -28,6 +31,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.concurrent.Executors
 
 
@@ -38,6 +42,8 @@ class MapsFragment : Fragment() {
 
     private val executor = Executors.newSingleThreadExecutor()
     private val handler = Handler(Looper.getMainLooper())
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private val requestLocation = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -57,7 +63,7 @@ class MapsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -65,15 +71,21 @@ class MapsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestLocation()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireContext())
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
 
     private fun setupAction(mMap: GoogleMap) {
 
+        mMap.uiSettings.isMyLocationButtonEnabled   = false
+        mMap.uiSettings.isZoomGesturesEnabled       = true
+        mMap.uiSettings.isZoomControlsEnabled       = true
+
         val bottomSheetLayout       = binding.includeBottomLayout.bottomSheet
         val bottomSheetBehavior     = BottomSheetBehavior.from(bottomSheetLayout)
         val searchArea              = bottomSheetLayout.findViewById<SearchView>(R.id.maps_search_edit)
+        val btnCurrentLocation      = bottomSheetLayout.findViewById<FloatingActionButton>(R.id.get_location)
 
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -103,6 +115,11 @@ class MapsFragment : Fragment() {
             override fun onQueryTextChange(p0: String): Boolean {
                 return false
             }
+        })
+
+        btnCurrentLocation.setOnClickListener({
+            bottomSheetBehavior.state   = BottomSheetBehavior.STATE_COLLAPSED
+            getLastLocation(mMap)
         })
     }
 
@@ -141,6 +158,24 @@ class MapsFragment : Fragment() {
                     mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
                 }
             }
+        }
+    }
+
+    private fun getLastLocation(mMap: GoogleMap) {
+        if (ActivityCompat.checkSelfPermission(
+                this.requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this.requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestLocation()
+            return
+        }
+        fusedLocationClient.lastLocation.addOnSuccessListener {
+            val lastLocationLatLng = LatLng(it.latitude, it.longitude)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLocationLatLng, 15f))
         }
     }
 
