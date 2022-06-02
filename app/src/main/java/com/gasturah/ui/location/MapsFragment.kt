@@ -99,10 +99,10 @@ class MapsFragment : Fragment() {
 
         })
 
-        searchArea.setOnClickListener({
+        searchArea.setOnClickListener {
             bottomSheetBehavior.state   = BottomSheetBehavior.STATE_EXPANDED
             searchArea.onActionViewExpanded()
-        })
+        }
 
         searchArea.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String): Boolean {
@@ -117,10 +117,10 @@ class MapsFragment : Fragment() {
             }
         })
 
-        btnCurrentLocation.setOnClickListener({
+        btnCurrentLocation.setOnClickListener {
             bottomSheetBehavior.state   = BottomSheetBehavior.STATE_COLLAPSED
             getLastLocation(mMap)
-        })
+        }
     }
 
     private fun requestLocation() {
@@ -140,7 +140,7 @@ class MapsFragment : Fragment() {
     private fun searchLocation(p0: String, mMap: GoogleMap){
 
         val location: String = p0
-        var addressList: List<Address>? = null
+        val addressList: List<Address>?
 
         if (location.isEmpty()){
             Toast.makeText(this.requireContext(), "provide location", Toast.LENGTH_SHORT).show()
@@ -185,7 +185,7 @@ class MapsFragment : Fragment() {
         val view = activity.currentFocus
         if (view != null) {
             val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
