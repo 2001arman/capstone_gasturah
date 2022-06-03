@@ -3,28 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/drawable/btn_round.xml" value="0.2205" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.2205" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1145" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/drawable/ic_switch_camera.xml" value="0.2205" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/drawable/rounded_edit.xml" value="0.176" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout-v31/bottom_sheet.xml" value="0.24375" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/activity_camera.xml" value="0.24375" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/activity_detail.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/activity_login.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/activity_maps.xml" value="0.264" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/activity_preview.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/activity_register.xml" value="0.24375" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/bottom_sheet.xml" value="0.264" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_dashboard.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_home.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_item.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_item_list.xml" value="0.2296875" />
-        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_maps.xml" value="0.264" />
+        <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_maps.xml" value="0.11854103343465046" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_notifications.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/layout/fragment_profile.xml" value="0.24375" />
         <entry key="..\:/Users/mikue/AndroidStudioProjects/Intermediate/Gasturah/app/src/main/res/menu/bottom_nav_menu.xml" value="0.264" />
+        <entry key="app/src/main/res/drawable/custom_button.xml" value="0.1645" />
+        <entry key="app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1355" />
+        <entry key="app/src/main/res/drawable/layout_posting_gambar.xml" value="0.1645" />
+        <entry key="app/src/main/res/drawable/profile_border.xml" value="0.1355" />
+        <entry key="app/src/main/res/layout/activity_camera.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/activity_preview.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/bottom_sheet.xml" value="0.12907608695652173" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/layout_posting_image.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/layout_profile_section.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.19947916666666668" />
       </map>
     </option>
   </component>
