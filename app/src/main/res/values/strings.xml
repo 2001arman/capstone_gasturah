@@ -26,4 +26,7 @@
     <string name="search">Search</string>
     <string name="get_location">Get Location</string>
     <string name="collapse_and_expand">Collapse and Expand</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="switch_camera">Switch Camera</string>
+    <string name="failed_capture">Failed Capture</string>
 </resources>
