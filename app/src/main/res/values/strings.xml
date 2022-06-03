@@ -30,4 +30,5 @@
     <string name="switch_camera">Switch Camera</string>
     <string name="failed_capture">Failed Capture</string>
     <string name="not_getting_permission">Not Getting Permission</string>
+    <string name="preview_picture">Preview Picture</string>
 </resources>
