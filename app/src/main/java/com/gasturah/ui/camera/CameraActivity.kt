@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.gasturah.R
 import com.gasturah.databinding.ActivityCameraBinding
+import com.gasturah.ui.main.PreviewActivity
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -84,7 +85,7 @@ class CameraActivity : AppCompatActivity() {
             takePhoto()
         }
         binding.btnSwitchCamera.setOnClickListener {
-            cameraSelector = if (cameraSelector.equals(CameraSelector.DEFAULT_BACK_CAMERA)) CameraSelector.DEFAULT_FRONT_CAMERA
+            cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
             else CameraSelector.DEFAULT_BACK_CAMERA
             startCamera()
         }
@@ -147,7 +148,7 @@ class CameraActivity : AppCompatActivity() {
                         "isBackCamera",
                         cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
                     )
-//                    setResult(AddStoryActivity.CAMERA_X_RESULT, intent)
+                    setResult(PreviewActivity.CAMERA_X_RESULT, intent)
                     finish()
                 }
             }
@@ -168,8 +169,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val CAMERA_X_RESULT = 200
-
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
