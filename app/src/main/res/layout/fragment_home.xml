@@ -1,51 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment"
     android:orientation="vertical">
-
-    <include layout="@layout/layout_profile_section"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rekomendasi untuk dikunjungi"
-        android:layout_marginLeft="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
-
-    <HorizontalScrollView
-        android:id="@+id/linear_rekomendasi"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:overScrollMode="never">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/rekomendasi_borobudur"
-                android:layout_marginLeft="20dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/layout_profile_section"/>
 
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/rekomendasi_borobudur"
-                android:layout_marginLeft="20dp"/>
+                android:text="Rekomendasi untuk dikunjungi"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:id="@+id/linear_rekomendasi"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/rekomendasi_borobudur"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/rekomendasi_borobudur"
+                        android:layout_marginLeft="20dp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/rekomendasi_borobudur"
+                        android:layout_marginLeft="20dp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/rekomendasi_borobudur"
+                        android:layout_marginLeft="20dp"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_posting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
-    </HorizontalScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-    <include layout="@layout/layout_posting_image"/>
-    <include layout="@layout/layout_posting_image"/>
 </LinearLayout>

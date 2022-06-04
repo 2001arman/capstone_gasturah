@@ -1,6 +1,8 @@
 package com.gasturah.ui.home
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +10,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gasturah.databinding.FragmentHomeBinding
+import com.gasturah.ui.home.RecyclerHomeAdapter
 
 
 class HomeFragment : Fragment() {
@@ -18,24 +25,8 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+//    private val recyclerView = RecyclerView()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        val imageView = ImageView(context)
-//        // setting height and width of imageview
-//        imageView.layoutParams = LinearLayout.LayoutParams(400, 400)
-//        imageView.x = 20F //setting margin from left
-//        imageView.y = 20F
-//        val uri = "@drawable/rekomendasi_borobudur.png"
-//        val imageResource = resources.getIdentifier(uri, null, getActivity()?.getPackageName())
-//        val res = resources.getDrawable(imageResource)
-//        imageView.setImageDrawable(res)
-//        val layout = binding.relativeRekomendasi
-
-        // Add ImageView to LinearLayout
-//        layout?.addView(imageView)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,21 +38,39 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+//        recyclerView = binding.recyclerPosting;
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+//        recyclerView.setAdapter(new RandomNumListAdapter(1234));
 
-//        LinearLayout myRoot = (LinearLayout)findViewById(binding.linearRekomendasi)
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
-//
-//        // Navigate to LoginPage. Well, ignore it. for testing purpose
-//        val button: Button = binding.btnDeskripsi
-//        button.setOnClickListener{
-//            val moveToLogin = Intent(context, DetailActivity::class.java)
-//            startActivity(moveToLogin)
-//        }
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("TAG", "TES DATA ON VIEW CREATED")
+        val layoutManager = if (activity?.applicationContext
+                ?.resources?.configuration?.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            LinearLayoutManager(context)
+        } else {
+            GridLayoutManager(context, 2)
+        }
+        binding.apply {
+            recyclerPosting.apply {
+                setHasFixedSize(true)
+//                isNestedScrollingEnabled = false
+                this.layoutManager = layoutManager
+                addItemDecoration(
+                    DividerItemDecoration(
+                        context,
+                        layoutManager.orientation
+                    )
+                )
+            }
+        }
+        binding.recyclerPosting.adapter = RecyclerHomeAdapter()
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
