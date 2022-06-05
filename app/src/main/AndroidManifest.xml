@@ -46,10 +46,6 @@
             android:name=".ui.main.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.location.MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
         <activity

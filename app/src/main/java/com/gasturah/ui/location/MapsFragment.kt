@@ -89,11 +89,11 @@ class MapsFragment : Fragment() {
 
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                bottomSheetBehavior.peekHeight = 240
+                bottomSheetBehavior.peekHeight = 620
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-               bottomSheetBehavior.peekHeight = 240
+               bottomSheetBehavior.peekHeight = 620
                 closeKeyboard()
             }
 
