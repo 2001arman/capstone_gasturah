@@ -45,12 +45,16 @@
         <activity
             android:name=".ui.main.DetailActivity"
             android:exported="false" />
+
+<!--        <activity-->
+<!--            android:name=".ui.location.MapsActivity"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/title_activity_maps" />-->
+
         <activity
             android:name=".ui.register.RegisterActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -59,6 +63,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main">
+
         </activity>
 
         <provider
