@@ -15,16 +15,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
+            android:id="@+id/img_profile"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/rekomendasi_borobudur"
             app:civ_border_width="2dp"
             app:civ_border_color="#FF000000" />
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arman Maulana"
             android:layout_marginLeft="20dp"
             android:textColor="@color/black"
             android:textStyle="bold"/>
@@ -128,7 +128,7 @@
                     app:layout_constraintStart_toStartOf="parent"/>
 
                 <TextView
-                    android:id="@+id/myImageViewText"
+                    android:id="@+id/tv_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
@@ -137,7 +137,6 @@
                     app:layout_constraintEnd_toEndOf="@id/icon_polygon"
                     app:layout_constraintTop_toTopOf="@id/icon_polygon"
                     app:layout_constraintBottom_toBottomOf="@id/icon_polygon"
-                    android:text="10"
                     android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="@color/color_main" />
