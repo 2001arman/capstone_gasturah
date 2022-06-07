@@ -1,18 +1,21 @@
 package com.gasturah.ui.login
 
+import ApiConfig
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.gasturah.MainActivity
+import com.gasturah.data.util.ModelPreferencesManager
 import com.gasturah.databinding.ActivityLoginBinding
-import com.gasturah.model.LoginResponse
-import com.google.gson.Gson
+import com.gasturah.model.UserModel
+import com.gasturah.response.LoginResponse
+import com.gasturah.ui.register.RegisterActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -22,9 +25,17 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ModelPreferencesManager.with(this)
+
         showLoading(false)
         binding.btnLogin.setOnClickListener{
             login(binding.inputEmail.text.toString(), binding.inputPassword.text.toString())
+        }
+
+        binding.tvRegister.setOnClickListener {
+            var intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent);
         }
 
         setupView()
@@ -38,6 +49,14 @@ class LoginActivity : AppCompatActivity() {
 
                 if (response.isSuccessful) {
                     if(response.body()!!.status == "success"){
+                        var username = response.body()!!.content.username
+                        var name = response.body()!!.content.name
+                        var profile_picture = response.body()!!.content.profilePicture
+                        var level = response.body()!!.content.level
+                        val user = UserModel(username, name, profile_picture, level)
+
+                        ModelPreferencesManager.put(user, "user")
+
                         var intent = Intent(this@LoginActivity, MainActivity::class.java)
                         startActivity(intent);
                         finish()

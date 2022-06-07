@@ -1,6 +1,7 @@
-package com.gasturah.model
+package com.gasturah.response
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class RegisterResponse(
 
@@ -11,7 +12,7 @@ data class RegisterResponse(
 	val value: String,
 
 	@field:SerializedName("content")
-	val content: String,
+	val content: Objects,
 
 	@field:SerializedName("status")
 	val status: String

@@ -32,4 +32,8 @@
     <string name="not_getting_permission">Not Getting Permission</string>
     <string name="preview_picture">Preview Picture</string>
     <string name="loading">Loading...</string>
+    <string name="don_t_have_an_account_sign_up_here">Don\'t Have an Account? Sign Up Here</string>
+    <string name="already_have_an_account_sign_in">Already Have an Account? Sign In</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="full_name">Full Name</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.gasturah.model
+package com.gasturah.response
 
 import com.google.gson.annotations.SerializedName
 

@@ -91,6 +91,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inp_password" />
 
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/purple_500"
+        android:background="#dadada"
+        android:clickable="true"
+        android:text="@string/don_t_have_an_account_sign_up_here"
+        app:layout_constraintTop_toBottomOf="@id/btn_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <include
         android:id="@+id/progress"
@@ -104,7 +117,7 @@
         android:id="@+id/login_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="inp_email, inp_password, btn_login" />
+        app:constraint_referenced_ids="inp_email, inp_password, btn_login, tv_register" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/login_loading_group"
