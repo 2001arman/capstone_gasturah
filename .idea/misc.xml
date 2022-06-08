@@ -37,8 +37,10 @@
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19947916666666668" />
+        <entry key="app/src/main/res/layout/layout_card_sejarah.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_posting_image.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/layout/layout_profile_section.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_sejarah.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/loading.xml" value="0.19947916666666668" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.19947916666666668" />
       </map>
