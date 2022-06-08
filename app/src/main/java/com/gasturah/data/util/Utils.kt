@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Environment
+import android.view.inputmethod.InputMethodManager
+import com.gasturah.MainActivity
 import com.gasturah.R
 import java.io.*
 import java.text.SimpleDateFormat

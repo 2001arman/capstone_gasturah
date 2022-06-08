@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-        const val baseUrl = "https://77dd-182-1-208-77.ap.ngrok.io/gasturah/"
+        const val baseUrl = "http://20.89.151.13/"
         fun getApiService(): ApiService {
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
