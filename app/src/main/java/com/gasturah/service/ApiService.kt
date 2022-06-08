@@ -1,6 +1,7 @@
 package com.gasturah.service
 import com.gasturah.response.LoginResponse
 import com.gasturah.response.RegisterResponse
+import com.gasturah.response.SejarahResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -19,4 +20,7 @@ interface ApiService {
         @Field("name") name: String,
         @Field("password") password: String,
     ): Call<RegisterResponse>
+
+    @POST("all-tempat-bersejarah.php")
+    fun getAllSejarah(): Call<SejarahResponse>
 }
