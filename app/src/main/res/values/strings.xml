@@ -36,4 +36,7 @@
     <string name="already_have_an_account_sign_in">Already Have an Account? Sign In</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="full_name">Full Name</string>
+    <string name="tv_title">Title</string>
+    <string name="descriptions">Descriptions</string>
+    <string name="title_favorite">Favorite</string>
 </resources>

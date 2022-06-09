@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                 //Pop intent
                 val moveToPreview = Intent(this@MainActivity, PreviewActivity::class.java)
                 moveToPreview.putExtra("photo", filename)
+                moveToPreview.putExtra("file", getFile)
                 startActivity(moveToPreview)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -83,5 +84,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val CAMERA_X_RESULT = 200
+        const val DATA = "DATA"
     }
 }

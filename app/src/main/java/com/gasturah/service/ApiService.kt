@@ -1,7 +1,9 @@
 package com.gasturah.service
 import com.gasturah.response.LoginResponse
+import com.gasturah.response.RecognizeResponse
 import com.gasturah.response.RegisterResponse
 import com.gasturah.response.SejarahResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -23,4 +25,11 @@ interface ApiService {
 
     @POST("all-tempat-bersejarah.php")
     fun getAllSejarah(): Call<SejarahResponse>
+
+    @Multipart
+    @POST("recognize.php")
+    fun recognize(
+        @Part file: MultipartBody.Part
+    ): Call<RecognizeResponse>
+
 }
