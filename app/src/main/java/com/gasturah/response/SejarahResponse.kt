@@ -1,6 +1,8 @@
 package com.gasturah.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class SejarahResponse(
 
@@ -17,6 +19,7 @@ data class SejarahResponse(
 	val status: String
 )
 
+@Parcelize
 data class ContentItem(
 
 	@field:SerializedName("nama")
@@ -25,15 +28,15 @@ data class ContentItem(
 	@field:SerializedName("foto")
 	val foto: String,
 
+	@field:SerializedName("detail")
+	val detail: String,
+
 	@field:SerializedName("sumber")
 	val sumber: String,
 
 	@field:SerializedName("latitude")
-	val latitude: String,
-
-	@field:SerializedName("detail")
-	val detail: String,
+	val latitude: Double,
 
 	@field:SerializedName("longitude")
-	val longitude: String
-)
+	val longitude: Double
+) : Parcelable
