@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.gasturah.MainActivity
 import com.gasturah.data.util.Loading
 import com.gasturah.databinding.ActivityPreviewBinding
+import com.gasturah.response.ContentItem
 import com.gasturah.response.ContentRecognize
 import com.gasturah.response.RecognizeResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -83,7 +84,7 @@ class PreviewActivity : AppCompatActivity() {
                     Toast.makeText(this@PreviewActivity, "File Uploaded : ${response.message()}", Toast.LENGTH_SHORT).show()
                     val respond = response.body()?.content
                     if(respond != null ) {
-                        val data = ContentRecognize(
+                        val data = ContentItem(
                             respond.nama,
                             respond.foto,
                             respond.detail,
