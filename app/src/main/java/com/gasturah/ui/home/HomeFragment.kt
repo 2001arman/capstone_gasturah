@@ -1,6 +1,7 @@
 package com.gasturah.ui.home
 
 import ApiConfig
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -9,15 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.gasturah.MainActivity
 import com.gasturah.data.util.ModelPreferencesManager
 import com.gasturah.databinding.FragmentHomeBinding
+import com.gasturah.databinding.LayoutCardSejarahBinding
 import com.gasturah.model.UserModel
+import com.gasturah.response.ContentItem
 import com.gasturah.response.SejarahResponse
+import com.gasturah.ui.main.DetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,14 +34,13 @@ class HomeFragment : Fragment() {
 
     private val baseurl: String = ApiConfig.baseUrl
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         return root
@@ -100,7 +103,29 @@ class HomeFragment : Fragment() {
                         Log.d("TAG", "JUMLAH DATA SEJARAH ${response.body()!!.content.size}")
 
                         binding.apply {
-                            recyclerRekomendasi.adapter = RecyclerSejarahAdapter(response.body()!!.content)
+                            recyclerRekomendasi.adapter = RecyclerSejarahAdapter(response.body()!!.content).apply {
+                                setOnItemClickCallback(object : RecyclerSejarahAdapter.OnItemClickCallback{
+                                    override fun OnItemClicked(
+                                        contentItem: ContentItem,
+                                        layoutCardSejarahBinding: LayoutCardSejarahBinding
+                                    ) {
+                                        val dataSejarah : ContentItem = contentItem
+                                        val moveToDetail = Intent(activity, DetailActivity::class.java )
+                                        moveToDetail.putExtra(MainActivity.DATA, dataSejarah)
+                                        startActivity(moveToDetail)
+//                                        view?.findNavController()?.navigate(
+//                                            R.id.action_navigation_home_to_detailActivity,
+//                                            bundleOf(
+//                                                "sejarah" to contentItem
+//                                            ),
+//                                            null,
+//
+//                                        )
+
+                                    }
+
+                                })
+                            }
                         }
                     } else{
                         Toast.makeText(context, "${response.body()!!.msg}",
