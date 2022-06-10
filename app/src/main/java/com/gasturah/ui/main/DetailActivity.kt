@@ -1,18 +1,13 @@
 package com.gasturah.ui.main
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.gasturah.R
 import com.gasturah.databinding.ActivityDetailBinding
+import com.gasturah.response.ContentItem
 import com.gasturah.response.ContentRecognize
 import com.gasturah.ui.favorite.FavoriteViewModel
-import com.gasturah.ui.location.MapsFragment
 
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
@@ -23,14 +18,17 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
 //        ViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
-        val id = intent.getParcelableExtra<ContentRecognize>(DATA) as ContentRecognize
+        val id = intent.getParcelableExtra<ContentItem>(DATA) as ContentItem
         getDetail(id)
         setupAction(id)
     }
 
-    private fun setupAction(id: ContentRecognize) {
+    private fun setupAction(id: ContentItem) {
         binding.btnToLocation.setOnClickListener {
 
+        }
+        binding.iconBack.setOnClickListener{
+            finish()
         }
 //        binding.iconHeart.setOnClickListener {
 //            if (favorite.equals(1)) {
@@ -59,7 +57,7 @@ class DetailActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun getDetail(id: ContentRecognize) {
+    private fun getDetail(id: ContentItem) {
         Glide.with(this).load("http://20.89.151.13/${id.foto}").into(binding.imgMain)
         Toast.makeText(this, id.foto, Toast.LENGTH_SHORT).show()
         binding.textDescription.text    = id.detail
