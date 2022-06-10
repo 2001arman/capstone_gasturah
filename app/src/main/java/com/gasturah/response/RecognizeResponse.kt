@@ -13,7 +13,7 @@ data class RecognizeResponse(
     val value: String,
 
     @field:SerializedName("content")
-    val content: ContentRecognize,
+    val content: ContentItem,
 
     @field:SerializedName("status")
     val status: String
