@@ -58,7 +58,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun getDetail(id: ContentItem) {
-        Glide.with(this).load("http://20.89.151.13/${id.foto}").into(binding.imgMain)
+        Glide.with(this).load("https://gasturah.000webhostapp.com/${id.foto}").into(binding.imgMain)
         Toast.makeText(this, id.foto, Toast.LENGTH_SHORT).show()
         binding.textDescription.text    = id.detail
         binding.textSumber.text         = id.sumber
