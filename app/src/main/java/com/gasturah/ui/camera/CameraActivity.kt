@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -30,12 +31,23 @@ class CameraActivity : AppCompatActivity() {
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
 
+    private val requestStorage = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            Toast.makeText(this, "Please Allow Permission", Toast.LENGTH_SHORT).show()
+            requestStorage()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+        requestStorage()
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -63,6 +75,10 @@ class CameraActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    private fun requestStorage() {
+        requestStorage.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
 
     public override fun onResume() {
