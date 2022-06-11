@@ -1,5 +1,6 @@
 package com.gasturah.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -52,6 +53,10 @@ class ProfileFragment : Fragment() {
                 .load(baseurl + user!!.profile_picture)
                 .into(profileSection.imgProfile)
             binding.recyclerPosting.adapter = RecyclerPostingAdapter()
+        }
+        binding.profileSection.btnSetting.setOnClickListener {
+            val moveToSetting = Intent(this.requireActivity(), SettingActivity::class.java)
+            startActivity(moveToSetting)
         }
     }
 }
