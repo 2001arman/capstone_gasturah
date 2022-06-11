@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.signature.ObjectKey
 import com.gasturah.MainActivity
 import com.gasturah.data.util.ModelPreferencesManager
 import com.gasturah.databinding.FragmentHomeBinding
@@ -82,9 +83,11 @@ class HomeFragment : Fragment() {
 //                )
             }
             profileSection.tvName.text = user!!.name
-            profileSection.tvLevel.text = user!!.level
+            profileSection.tvLevel.text = user.level
             Glide.with(this@HomeFragment)
-                .load(baseurl + user!!.profile_picture)
+                .load(baseurl + user.profile_picture)
+                .signature(ObjectKey(System.currentTimeMillis()))
+                .circleCrop()
                 .into(profileSection.imgProfile)
         }
         binding.recyclerPosting.adapter = RecyclerPostingAdapter()

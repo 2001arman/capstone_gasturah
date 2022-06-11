@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pengaturan"
+            android:text="@string/tv_setting"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -49,7 +49,7 @@
                 android:src="@drawable/profile" />
 
             <TextView
-                android:id="@+id/tv_settting_name"
+                android:id="@+id/tv_setting_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -69,7 +69,8 @@
                 android:padding="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_settting_name" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_setting_name"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/tv_setting_username"
@@ -92,7 +93,8 @@
                 android:padding="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_setting_username" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_setting_username"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/tv_setting_password"
@@ -100,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/password"
+                android:text="@string/tv_setting_password"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_username" />
 
@@ -115,10 +117,11 @@
                 android:padding="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_setting_password" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_setting_password"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_update_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -134,11 +137,11 @@
                 android:gravity="center"
                 android:text="@string/tv_btn_logout"
                 android:textColor="@color/color_main"
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button2" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_update_profile" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

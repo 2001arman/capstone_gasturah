@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.signature.ObjectKey
 import com.gasturah.data.util.ModelPreferencesManager
 import com.gasturah.databinding.FragmentProfileBinding
 import com.gasturah.model.UserModel
@@ -32,12 +34,6 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.btnLogout.setOnClickListener {
-//            ModelPreferencesManager.preferences.edit().remove("user").commit()
-//            var intent = Intent(context, LoginActivity::class.java)
-//            startActivity(intent);
-//            activity?.finish()
-//        }
         val user = ModelPreferencesManager.get<UserModel>("user")
         val horizontalLayoutManagaer =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -48,9 +44,11 @@ class ProfileFragment : Fragment() {
 
             }
             profileSection.tvName.text = user!!.name
-            profileSection.tvLevel.text = user!!.level
+            profileSection.tvLevel.text = user.level
             Glide.with(this@ProfileFragment)
-                .load(baseurl + user!!.profile_picture)
+                .load(baseurl + user.profile_picture)
+                .signature(ObjectKey(System.currentTimeMillis()))
+                .circleCrop()
                 .into(profileSection.imgProfile)
             binding.recyclerPosting.adapter = RecyclerPostingAdapter()
         }

@@ -1,9 +1,7 @@
 package com.gasturah.service
-import com.gasturah.response.LoginResponse
-import com.gasturah.response.RecognizeResponse
-import com.gasturah.response.RegisterResponse
-import com.gasturah.response.SejarahResponse
+import com.gasturah.response.*
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -29,7 +27,16 @@ interface ApiService {
     @Multipart
     @POST("recognize.php")
     fun recognize(
-        @Part file: MultipartBody.Part
+        @Part foto: MultipartBody.Part
     ): Call<RecognizeResponse>
 
+    @Multipart
+    @POST("edit-profile.php")
+    fun updateProfile(
+        @Part("username_awal") username_awal: RequestBody,
+        @Part("username_baru") username_baru: RequestBody,
+        @Part("nama") nama: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part("profile_picture") profile_picture : RequestBody
+    ): Call<UpdateProfileResponse>
 }

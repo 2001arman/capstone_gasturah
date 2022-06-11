@@ -51,9 +51,10 @@
     <string name="tv_name">Name</string>
     <string name="tv_setting_username">Username</string>
     <string name="tv_location">Location</string>
-    <string name="password">Password</string>
+    <string name="tv_setting_password">Password (Optional)</string>
     <string name="save">Save</string>
     <string name="language">Language</string>
     <string name="choose_a_picture">Choose a Picture</string>
     <string name="tv_btn_logout">Logout</string>
+    <string name="tv_setting">Setting</string>
 </resources>
