@@ -66,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                 } else {
+                    showLoading(false)
                     Toast.makeText(this@LoginActivity, "${response.body()}",
                         Toast.LENGTH_LONG).show();
 
