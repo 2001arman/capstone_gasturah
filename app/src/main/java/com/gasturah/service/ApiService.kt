@@ -32,4 +32,10 @@ interface ApiService {
         @Part file: MultipartBody.Part
     ): Call<RecognizeResponse>
 
+    @FormUrlEncoded
+    @POST("share-image.php")
+    fun shareImage(
+        @Field("username") username: String,
+        @Field("foto") password: String
+    ): Call<LoginResponse>
 }
