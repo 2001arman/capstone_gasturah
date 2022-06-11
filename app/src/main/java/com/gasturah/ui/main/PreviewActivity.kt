@@ -92,11 +92,13 @@ class PreviewActivity : AppCompatActivity() {
                             respond.latitude,
                             respond.longitude
                         )
+                        Log.d("Failure To Send : ", response.message())
                         val moveToDetail = Intent(this@PreviewActivity, DetailActivity::class.java )
                         moveToDetail.putExtra(MainActivity.DATA, data)
                         startActivity(moveToDetail)
                     }
                 } else {
+                    Log.d("Failure To Send : ", response.message())
                     Toast.makeText(this@PreviewActivity, "ERROR : ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }

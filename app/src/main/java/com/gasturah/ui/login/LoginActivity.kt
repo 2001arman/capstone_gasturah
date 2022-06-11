@@ -66,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                 } else {
+                    showLoading(false)
                     Toast.makeText(this@LoginActivity, "${response.body()}",
                         Toast.LENGTH_LONG).show();
 
@@ -73,6 +74,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                showLoading(false)
                 Toast.makeText(this@LoginActivity, "${t.message}",
                     Toast.LENGTH_LONG).show();
             }

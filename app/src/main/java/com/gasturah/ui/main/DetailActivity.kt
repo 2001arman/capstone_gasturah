@@ -1,5 +1,6 @@
 package com.gasturah.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,8 +9,12 @@ import com.gasturah.databinding.ActivityDetailBinding
 import com.gasturah.response.ContentItem
 import com.gasturah.response.ContentRecognize
 import com.gasturah.ui.favorite.FavoriteViewModel
+import com.gasturah.ui.share.ShareActivity
 
 class DetailActivity : AppCompatActivity() {
+
+    private val baseurl: String = ApiConfig.baseUrl
+
     private lateinit var binding: ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +34,11 @@ class DetailActivity : AppCompatActivity() {
         }
         binding.iconBack.setOnClickListener{
             finish()
+        }
+
+        binding.iconShare.setOnClickListener{
+            val intent = Intent(this@DetailActivity, ShareActivity::class.java)
+            startActivity(intent)
         }
 //        binding.iconHeart.setOnClickListener {
 //            if (favorite.equals(1)) {
@@ -58,10 +68,11 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun getDetail(id: ContentItem) {
-        Glide.with(this).load("https://gasturah.000webhostapp.com/${id.foto}").into(binding.imgMain)
+        Glide.with(this).load(baseurl+"${id.foto}").into(binding.imgMain)
         Toast.makeText(this, id.foto, Toast.LENGTH_SHORT).show()
         binding.textDescription.text    = id.detail
         binding.textSumber.text         = id.sumber
+        binding.tvNamaTempat.text = id.nama
 
     }
 

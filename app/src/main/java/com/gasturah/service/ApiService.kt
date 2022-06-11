@@ -39,4 +39,11 @@ interface ApiService {
         @Part("password") password: RequestBody,
         @Part("profile_picture") profile_picture : RequestBody
     ): Call<UpdateProfileResponse>
+
+    @FormUrlEncoded
+    @POST("share-image.php")
+    fun shareImage(
+        @Field("username") username: String,
+        @Field("foto") password: String
+    ): Call<LoginResponse>
 }
