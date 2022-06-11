@@ -1,5 +1,6 @@
 package com.gasturah.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +9,7 @@ import com.gasturah.databinding.ActivityDetailBinding
 import com.gasturah.response.ContentItem
 import com.gasturah.response.ContentRecognize
 import com.gasturah.ui.favorite.FavoriteViewModel
+import com.gasturah.ui.share.ShareActivity
 
 class DetailActivity : AppCompatActivity() {
 
@@ -32,6 +34,11 @@ class DetailActivity : AppCompatActivity() {
         }
         binding.iconBack.setOnClickListener{
             finish()
+        }
+
+        binding.iconShare.setOnClickListener{
+            val intent = Intent(this@DetailActivity, ShareActivity::class.java)
+            startActivity(intent)
         }
 //        binding.iconHeart.setOnClickListener {
 //            if (favorite.equals(1)) {
