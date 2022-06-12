@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,9 +18,11 @@ import com.gasturah.databinding.ActivityPreviewBinding
 import com.gasturah.response.ContentItem
 import com.gasturah.response.ContentRecognize
 import com.gasturah.response.RecognizeResponse
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,28 +56,15 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun uploadPhoto(bmp: Bitmap) {
 
-        val file = File(this.cacheDir, "photo")
-        file.createNewFile()
-        val fileOutputStream    = FileOutputStream(file)
-        val photo               = intent.getStringExtra("photo")
-        val fileInputStream: FileInputStream    = openFileInput(photo)
         val byteArrayOutputStream = ByteArrayOutputStream()
-        val bitmapData = byteArrayOutputStream.toByteArray()
-
-
-        fileOutputStream.write(bitmapData)
-        fileInputStream.close()
-
-        val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        val imageMultiPart: MultipartBody.Part = MultipartBody.Part.createFormData(
-            "photo",
-            file.name,
-            requestImageFile
-        )
+        bmp.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream)
+        val b: ByteArray = byteArrayOutputStream.toByteArray()
+        val photo64 = Base64.encodeToString(b, Base64.DEFAULT)
+        val photo   = photo64.toRequestBody("text/plain".toMediaType())
 
         binding.imagePreview.setImageBitmap(bmp)
 
-        ApiConfig.getApiService().recognize(imageMultiPart).enqueue(object: Callback<RecognizeResponse> {
+        ApiConfig.getApiService().recognize(photo).enqueue(object: Callback<RecognizeResponse> {
             override fun onResponse(
                 call: Call<RecognizeResponse>,
                 response: Response<RecognizeResponse>
@@ -96,6 +86,7 @@ class PreviewActivity : AppCompatActivity() {
                         val moveToDetail = Intent(this@PreviewActivity, DetailActivity::class.java )
                         moveToDetail.putExtra(MainActivity.DATA, data)
                         startActivity(moveToDetail)
+                        finish()
                     }
                 } else {
                     Log.d("Failure To Send : ", response.message())

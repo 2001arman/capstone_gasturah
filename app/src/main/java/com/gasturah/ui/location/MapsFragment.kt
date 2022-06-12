@@ -2,16 +2,20 @@ package com.gasturah.ui.location
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
+import android.location.LocationManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
@@ -31,7 +35,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.concurrent.Executors
 
 
@@ -45,6 +48,12 @@ class MapsFragment : Fragment() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private lateinit var bottomSheetLayout : LinearLayout
+    private lateinit var bottomSheetBehavior : BottomSheetBehavior<LinearLayout>
+    private lateinit var searchArea : SearchView
+
+    private lateinit var mMips : GoogleMap
+
     private val requestLocation = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
@@ -57,6 +66,7 @@ class MapsFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         getMyLocation(googleMap)
         setupAction(googleMap)
+        mMips = googleMap
     }
 
     override fun onCreateView(
@@ -68,9 +78,19 @@ class MapsFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        getMyLocation(mMips)
+        getLocationService()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestLocation()
+        bottomSheetLayout   = binding.includeBottomLayout.bottomSheet
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
+        searchArea          = bottomSheetLayout.findViewById(R.id.maps_search_edit)
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireContext())
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
@@ -82,10 +102,7 @@ class MapsFragment : Fragment() {
         mMap.uiSettings.isZoomGesturesEnabled       = true
         mMap.uiSettings.isZoomControlsEnabled       = true
 
-        val bottomSheetLayout       = binding.includeBottomLayout.bottomSheet
-        val bottomSheetBehavior     = BottomSheetBehavior.from(bottomSheetLayout)
-        val searchArea              = bottomSheetLayout.findViewById<SearchView>(R.id.maps_search_edit)
-        val btnCurrentLocation      = bottomSheetLayout.findViewById<FloatingActionButton>(R.id.get_location)
+        getLocationService()
 
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -116,11 +133,6 @@ class MapsFragment : Fragment() {
                 return false
             }
         })
-
-        btnCurrentLocation.setOnClickListener {
-            bottomSheetBehavior.state   = BottomSheetBehavior.STATE_COLLAPSED
-            getLastLocation(mMap)
-        }
     }
 
     private fun requestLocation() {
@@ -134,6 +146,22 @@ class MapsFragment : Fragment() {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             mMap.isMyLocationEnabled = true
+        }
+    }
+
+    private fun getLocationService() {
+        val locationManager = this.context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            binding.includeBottomLayout.getLocation.setImageResource(R.drawable.ic_baseline_location_on_24)
+            binding.includeBottomLayout.getLocation.setOnClickListener {
+                bottomSheetBehavior.state   = BottomSheetBehavior.STATE_COLLAPSED
+                getLastLocation(mMips)
+            }
+        } else {
+            binding.includeBottomLayout.getLocation.setImageResource(R.drawable.ic_baseline_location_disabled_24)
+            binding.includeBottomLayout.getLocation.setOnClickListener {
+                context?.startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            }
         }
     }
 
