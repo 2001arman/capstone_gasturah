@@ -69,7 +69,6 @@ class DetailActivity : AppCompatActivity() {
 
     private fun getDetail(id: ContentItem) {
         Glide.with(this).load(baseurl+"${id.foto}").into(binding.imgMain)
-        Toast.makeText(this, id.foto, Toast.LENGTH_SHORT).show()
         binding.textDescription.text    = id.detail
         binding.textSumber.text         = id.sumber
         binding.tvNamaTempat.text = id.nama
