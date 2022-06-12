@@ -1,20 +1,22 @@
 package com.gasturah.ui.profile
 
+import ApiConfig
+import android.R
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.signature.ObjectKey
 import com.gasturah.data.util.ModelPreferencesManager
 import com.gasturah.databinding.FragmentProfileBinding
 import com.gasturah.model.UserModel
 import com.gasturah.ui.home.RecyclerPostingAdapter
+
 
 class ProfileFragment : Fragment() {
 
@@ -45,10 +47,23 @@ class ProfileFragment : Fragment() {
             }
             profileSection.tvName.text = user!!.name
             profileSection.tvLevel.text = user.level
+
+            val imgLoading = CircularProgressDrawable(requireContext())
+            imgLoading.setColorSchemeColors(
+                R.color.holo_orange_light,
+                R.color.holo_orange_dark,
+                R.color.system_accent1_400
+            )
+            imgLoading.centerRadius = 30f
+            imgLoading.strokeWidth = 5f
+            imgLoading.start()
+
             Glide.with(this@ProfileFragment)
                 .load(baseurl + user.profile_picture)
                 .signature(ObjectKey(System.currentTimeMillis()))
+                .placeholder(imgLoading)
                 .circleCrop()
+
                 .into(profileSection.imgProfile)
             binding.recyclerPosting.adapter = RecyclerPostingAdapter()
         }
