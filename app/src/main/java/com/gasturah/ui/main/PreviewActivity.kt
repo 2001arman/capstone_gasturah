@@ -55,7 +55,7 @@ class PreviewActivity : AppCompatActivity() {
 
     fun reduceFileImage(file: File): File {
         val bitmap = BitmapFactory.decodeFile(file.path)
-        var compressQuality = 100
+        var compressQuality = 80
         var streamLength: Int
 
         do {
@@ -63,8 +63,8 @@ class PreviewActivity : AppCompatActivity() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
             val bmpPicByteArray = bmpStream.toByteArray()
             streamLength = bmpPicByteArray.size
-            compressQuality -= 5
-        } while (streamLength > 1000000)
+            compressQuality -= 10
+        } while (streamLength > 250000)
 
         bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
 
@@ -108,7 +108,8 @@ class PreviewActivity : AppCompatActivity() {
 //        fileOutputStream.write(bitmapData)
 //        fileInputStream.close()
 //        getFile = bitmapToFile(result, "Android/media/com.example.temantani/TemanTani/" + photoFile.name) as File?
-        val file = bitmapToFile(bmp, "Android/media/com.gasturah/Gasturah/gasturah.jpeg" ) as File
+        val fileNotReduced = bitmapToFile(bmp, "Android/media/com.gasturah/Gasturah/gasturah.jpeg" ) as File
+        val file   = reduceFileImage(fileNotReduced)
 
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val imageMultiPart: MultipartBody.Part = MultipartBody.Part.createFormData(
@@ -141,6 +142,7 @@ class PreviewActivity : AppCompatActivity() {
                         val moveToDetail = Intent(this@PreviewActivity, DetailActivity::class.java )
                         moveToDetail.putExtra(MainActivity.DATA, data)
                         startActivity(moveToDetail)
+                        finish()
                     }
                 } else {
                     Log.d("Failure To Send ELSE: ", response.toString())
