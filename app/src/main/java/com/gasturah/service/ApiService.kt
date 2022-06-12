@@ -45,5 +45,14 @@ interface ApiService {
     fun shareImage(
         @Field("username") username: String,
         @Field("foto") password: String
-    ): Call<LoginResponse>
+    ): Call<ShareImageResponse>
+
+    @POST("get-all-posting.php")
+    fun getAllPosting(): Call<PostinganResponse>
+
+    @FormUrlEncoded
+    @POST("get-posting-user.php")
+    fun getPostingUser(
+        @Field("username") username: String,
+    ): Call<PostinganResponse>
 }
