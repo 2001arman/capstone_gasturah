@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
 
         showLoading(false)
         binding.btnLogin.setOnClickListener{
-            login(binding.inputEmail.text.toString(), binding.inputPassword.text.toString())
+            login(binding.inputUsername.text.toString(), binding.inputPassword.text.toString())
         }
 
         binding.tvRegister.setOnClickListener {
