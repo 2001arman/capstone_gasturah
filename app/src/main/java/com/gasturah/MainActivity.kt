@@ -1,10 +1,12 @@
 package com.gasturah
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -41,12 +43,26 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         setupAction()
+        requestStorage()
     }
 
     private fun setupAction() {
         binding.fab.setOnClickListener {
             val intent = Intent(this, CameraActivity::class.java)
             launcherIntentCameraX.launch(intent)
+        }
+    }
+
+    private fun requestStorage() {
+        requestStorage.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
+
+    private val requestStorage = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (!isGranted) {
+            Toast.makeText(this, "Please Allow Permission", Toast.LENGTH_SHORT).show()
+            requestStorage()
         }
     }
 

@@ -31,23 +31,12 @@ class CameraActivity : AppCompatActivity() {
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
 
-    private val requestStorage = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (!isGranted) {
-            Toast.makeText(this, "Please Allow Permission", Toast.LENGTH_SHORT).show()
-            requestStorage()
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         cameraExecutor = Executors.newSingleThreadExecutor()
-
-        requestStorage()
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -75,10 +64,6 @@ class CameraActivity : AppCompatActivity() {
                 finish()
             }
         }
-    }
-
-    private fun requestStorage() {
-        requestStorage.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
 
     public override fun onResume() {
@@ -118,7 +103,7 @@ class CameraActivity : AppCompatActivity() {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
-            imageCapture = ImageCapture.Builder().build()
+            imageCapture = ImageCapture.Builder().setJpegQuality(QUALITY_JPEG_80).build()
 
             try {
                 cameraProvider.unbindAll()
@@ -188,5 +173,6 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+        const val QUALITY_JPEG_80 = 80
     }
 }
