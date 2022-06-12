@@ -25,9 +25,9 @@ interface ApiService {
     fun getAllSejarah(): Call<SejarahResponse>
 
     @Multipart
-    @POST("recognize.php")
+    @POST("predict")
     fun recognize(
-        @Part foto: MultipartBody.Part
+        @Part file: MultipartBody.Part
     ): Call<RecognizeResponse>
 
     @Multipart
