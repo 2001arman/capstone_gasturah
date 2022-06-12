@@ -30,6 +30,13 @@ class LoginActivity : AppCompatActivity() {
 
         ModelPreferencesManager.with(this)
 
+        val user = ModelPreferencesManager.get<UserModel>("user")
+
+        if(user?.name != null) {
+            startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+            finish()
+        }
+
         showLoading(false)
         binding.btnLogin.setOnClickListener{
             closeKeyboard()
