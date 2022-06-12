@@ -32,8 +32,7 @@
     <ImageView
         android:id="@+id/image_posting"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:scaleType="fitXY"
+        android:layout_height="wrap_content"
         android:src="@drawable/lawangsewu"/>
 
 </LinearLayout>

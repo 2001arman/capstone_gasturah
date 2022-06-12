@@ -34,7 +34,6 @@ class RecyclerSejarahAdapter(private val listSejarah: List<ContentItem>) :  Recy
     }
 
     override fun onBindViewHolder(holder: RecyclerSejarahAdapter.ViewHolder, position: Int) {
-        Log.d("TAG", "DATA SEJARAH ADAPTER ${listSejarah[position]}")
         val sejarah = listSejarah[position]
         holder.apply {
             binding.apply {
