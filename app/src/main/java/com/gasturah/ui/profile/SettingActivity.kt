@@ -10,6 +10,7 @@ import android.util.Base64
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
 import com.gasturah.MainActivity
@@ -57,10 +58,20 @@ class SettingActivity : AppCompatActivity() {
 
         binding.etName.setText(user?.name)
         binding.etUsername.setText(user?.username)
+        val imgLoading = CircularProgressDrawable(this)
+        imgLoading.setColorSchemeColors(
+            android.R.color.holo_orange_light,
+            android.R.color.holo_orange_dark,
+            android.R.color.system_accent1_400
+        )
+        imgLoading.centerRadius = 60f
+        imgLoading.strokeWidth = 5f
+        imgLoading.start()
         Glide.with(this)
             .load(baseurl + user?.profile_picture)
             .signature(ObjectKey(System.currentTimeMillis()))
             .circleCrop()
+            .placeholder(imgLoading)
             .into(binding.imageProfile)
     }
 
