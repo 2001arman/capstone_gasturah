@@ -40,31 +40,6 @@ class DetailActivity : AppCompatActivity() {
             val intent = Intent(this@DetailActivity, ShareActivity::class.java)
             startActivity(intent)
         }
-//        binding.iconHeart.setOnClickListener {
-//            if (favorite.equals(1)) {
-//                binding.iconHeart.setImageDrawable(
-//                    ContextCompat.getDrawable(
-//                        applicationContext,
-//                        R.drawable.ic_baseline_favorite_border_24
-//                    )
-//                )
-//                ViewModel.DeleteFavorite(id!!.nama)
-//                Toast.makeText(applicationContext, "Unfavorite ${id.nama}", Toast.LENGTH_SHORT).show()
-//                favorite = 0
-//            } else {
-//                binding.iconHeart.setImageDrawable(
-//                    ContextCompat.getDrawable(
-//                        applicationContext,
-//                        R.drawable.ic_baseline_favorite_24
-//                    )
-//                )
-//                if (DATA != null) {
-//                    ViewModel.AddFavorite(id.nama, id.foto, id.detail, id.latitude, id.longitude)
-//                    Toast.makeText(applicationContext, "Favorite ${id.nama}", Toast.LENGTH_SHORT).show()
-//                }
-//                favorite = 1
-//            }
-//        }
     }
 
     private fun getDetail(id: ContentItem) {

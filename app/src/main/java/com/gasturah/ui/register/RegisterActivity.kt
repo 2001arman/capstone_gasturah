@@ -59,8 +59,6 @@ class RegisterActivity : AppCompatActivity() {
                     if(response.body()!!.status == "success"){
                         Toast.makeText(this@RegisterActivity, "${response.body()!!.msg}",
                             Toast.LENGTH_LONG).show();
-//                        var intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-//                        startActivity(intent);
                         finish()
                     } else{
                         Toast.makeText(this@RegisterActivity, "${response.body()!!.msg}",

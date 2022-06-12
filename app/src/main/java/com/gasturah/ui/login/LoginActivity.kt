@@ -110,12 +110,4 @@ class LoginActivity : AppCompatActivity() {
     private fun setupView() {
         supportActionBar?.hide()
     }
-
-    private fun setupAnimation() {
-
-    }
-
-    private fun setupAction() {
-
-    }
 }

@@ -53,7 +53,7 @@ class PreviewActivity : AppCompatActivity() {
         }
     }
 
-    fun reduceFileImage(file: File): File {
+    private fun reduceFileImage(file: File): File {
         val bitmap = BitmapFactory.decodeFile(file.path)
         var compressQuality = 80
         var streamLength: Int
@@ -71,7 +71,7 @@ class PreviewActivity : AppCompatActivity() {
         return file
     }
 
-    fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File? {
+    private fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File? {
         var file: File? = null
 
         return try {
@@ -94,20 +94,6 @@ class PreviewActivity : AppCompatActivity() {
     }
 
     private fun uploadPhoto(bmp: Bitmap) {
-//        val photo2 = intent.getStringExtra("photo")
-//        val fileInputStream2: FileInputStream    = openFileInput(photo2)
-//        val file = File(this.filesDir, "photo")
-//        file.createNewFile()
-//        val fileOutputStream    = FileOutputStream(file)
-//        val photo               = intent.getStringExtra("photo")
-//        val fileInputStream: FileInputStream    = openFileInput(photo)
-//        val byteArrayOutputStream = ByteArrayOutputStream()
-//        val bitmapData = byteArrayOutputStream.toByteArray()
-//
-//
-//        fileOutputStream.write(bitmapData)
-//        fileInputStream.close()
-//        getFile = bitmapToFile(result, "Android/media/com.example.temantani/TemanTani/" + photoFile.name) as File?
         val fileNotReduced = bitmapToFile(bmp, "Android/media/com.gasturah/Gasturah/gasturah.jpeg" ) as File
         val file   = reduceFileImage(fileNotReduced)
 
@@ -138,7 +124,6 @@ class PreviewActivity : AppCompatActivity() {
                             respond.latitude,
                             respond.longitude
                         )
-                        Log.d("Failure To Send : ", response.message())
                         val moveToDetail = Intent(this@PreviewActivity, DetailActivity::class.java )
                         moveToDetail.putExtra(MainActivity.DATA, data)
                         startActivity(moveToDetail)

@@ -80,12 +80,6 @@ class HomeFragment : Fragment() {
             recyclerRekomendasi.apply {
                 setHasFixedSize(true)
                 this.layoutManager = horizontalLayoutManagaer
-//                addItemDecoration(
-//                    DividerItemDecoration(
-//                        context,
-//                        layoutManager.orientation
-//                    )
-//                )
             }
             profileSection.tvName.text = user!!.name
             profileSection.tvLevel.text = user.level
