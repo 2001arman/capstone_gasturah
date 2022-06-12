@@ -184,6 +184,7 @@ class CameraActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
+
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
