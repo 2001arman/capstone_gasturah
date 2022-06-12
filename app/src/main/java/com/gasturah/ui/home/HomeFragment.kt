@@ -21,6 +21,7 @@ import com.gasturah.databinding.FragmentHomeBinding
 import com.gasturah.databinding.LayoutCardSejarahBinding
 import com.gasturah.model.UserModel
 import com.gasturah.response.ContentItem
+import com.gasturah.response.PostinganResponse
 import com.gasturah.response.SejarahResponse
 import com.gasturah.ui.main.DetailActivity
 import retrofit2.Call
@@ -59,6 +60,7 @@ class HomeFragment : Fragment() {
 
         val user = ModelPreferencesManager.get<UserModel>("user")
         getDataSejarah()
+        getDataPostingan()
         val horizontalLayoutManagaer =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.apply {
@@ -90,7 +92,34 @@ class HomeFragment : Fragment() {
                 .circleCrop()
                 .into(profileSection.imgProfile)
         }
-        binding.recyclerPosting.adapter = RecyclerPostingAdapter()
+
+    }
+
+    private fun getDataPostingan(){
+        showLoading(true)
+        ApiConfig.getApiService().getAllPosting().enqueue(object : Callback<PostinganResponse> {
+            override fun onResponse(call: Call<PostinganResponse>, response: Response<PostinganResponse>) {
+                showLoading(false)
+                if (response.isSuccessful) {
+                    if(response.body()!!.status == "success"){
+                        binding.apply {
+                            recyclerPosting.adapter = RecyclerPostingAdapter(response.body()!!.content).apply {}
+                        }
+                    } else{
+                        Toast.makeText(context, "${response.body()!!.msg}",
+                            Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(context, "${response.body()}",
+                        Toast.LENGTH_LONG).show();
+                }
+            }
+
+            override fun onFailure(call: Call<PostinganResponse>, t: Throwable) {
+                Toast.makeText(context, "${t.message}",
+                    Toast.LENGTH_LONG).show();
+            }
+        })
     }
 
     private fun getDataSejarah(){
@@ -116,15 +145,6 @@ class HomeFragment : Fragment() {
                                         val moveToDetail = Intent(activity, DetailActivity::class.java )
                                         moveToDetail.putExtra(MainActivity.DATA, dataSejarah)
                                         startActivity(moveToDetail)
-//                                        view?.findNavController()?.navigate(
-//                                            R.id.action_navigation_home_to_detailActivity,
-//                                            bundleOf(
-//                                                "sejarah" to contentItem
-//                                            ),
-//                                            null,
-//
-//                                        )
-
                                     }
 
                                 })
