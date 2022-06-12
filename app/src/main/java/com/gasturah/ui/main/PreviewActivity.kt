@@ -5,7 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Base64
+import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,11 +18,10 @@ import com.gasturah.databinding.ActivityPreviewBinding
 import com.gasturah.response.ContentItem
 import com.gasturah.response.ContentRecognize
 import com.gasturah.response.RecognizeResponse
-import okhttp3.MediaType.Companion.toMediaType
+import com.gasturah.service.ApiConfigCC
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,17 +53,73 @@ class PreviewActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadPhoto(bmp: Bitmap) {
+    fun reduceFileImage(file: File): File {
+        val bitmap = BitmapFactory.decodeFile(file.path)
+        var compressQuality = 100
+        var streamLength: Int
 
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bmp.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream)
-        val b: ByteArray = byteArrayOutputStream.toByteArray()
-        val photo64 = Base64.encodeToString(b, Base64.DEFAULT)
-        val photo   = photo64.toRequestBody("text/plain".toMediaType())
+        do {
+            val bmpStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+            val bmpPicByteArray = bmpStream.toByteArray()
+            streamLength = bmpPicByteArray.size
+            compressQuality -= 5
+        } while (streamLength > 1000000)
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+
+        return file
+    }
+
+    fun bitmapToFile(bitmap: Bitmap, fileNameToSave: String): File? {
+        var file: File? = null
+
+        return try {
+            file = File(Environment.getExternalStorageDirectory().toString() + File.separator + fileNameToSave)
+            file.createNewFile()
+
+            val bos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos) // YOU can also save it in JPEG
+            val bitmapdata = bos.toByteArray()
+
+            val fos = FileOutputStream(file)
+            fos.write(bitmapdata)
+            fos.flush()
+            fos.close()
+            file
+        } catch (e: Exception) {
+            e.printStackTrace()
+            file
+        }
+    }
+
+    private fun uploadPhoto(bmp: Bitmap) {
+//        val photo2 = intent.getStringExtra("photo")
+//        val fileInputStream2: FileInputStream    = openFileInput(photo2)
+//        val file = File(this.filesDir, "photo")
+//        file.createNewFile()
+//        val fileOutputStream    = FileOutputStream(file)
+//        val photo               = intent.getStringExtra("photo")
+//        val fileInputStream: FileInputStream    = openFileInput(photo)
+//        val byteArrayOutputStream = ByteArrayOutputStream()
+//        val bitmapData = byteArrayOutputStream.toByteArray()
+//
+//
+//        fileOutputStream.write(bitmapData)
+//        fileInputStream.close()
+//        getFile = bitmapToFile(result, "Android/media/com.example.temantani/TemanTani/" + photoFile.name) as File?
+        val file = bitmapToFile(bmp, "Android/media/com.gasturah/Gasturah/gasturah.jpeg" ) as File
+
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultiPart: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "file",
+            file.name,
+            requestImageFile
+        )
 
         binding.imagePreview.setImageBitmap(bmp)
 
-        ApiConfig.getApiService().recognize(photo).enqueue(object: Callback<RecognizeResponse> {
+        ApiConfigCC.getApiService().recognize(imageMultiPart).enqueue(object: Callback<RecognizeResponse> {
             override fun onResponse(
                 call: Call<RecognizeResponse>,
                 response: Response<RecognizeResponse>
@@ -86,10 +141,9 @@ class PreviewActivity : AppCompatActivity() {
                         val moveToDetail = Intent(this@PreviewActivity, DetailActivity::class.java )
                         moveToDetail.putExtra(MainActivity.DATA, data)
                         startActivity(moveToDetail)
-                        finish()
                     }
                 } else {
-                    Log.d("Failure To Send : ", response.message())
+                    Log.d("Failure To Send ELSE: ", response.toString())
                     Toast.makeText(this@PreviewActivity, "ERROR : ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -105,6 +159,7 @@ class PreviewActivity : AppCompatActivity() {
     private fun getImage() {
         val photo = intent.getStringExtra("photo")
         try {
+            Log.d("DIREKTORI", photo.toString())
             val fileInputStream: FileInputStream    = openFileInput(photo)
             val bmp: Bitmap                         = BitmapFactory.decodeStream(fileInputStream)
             fileInputStream.close()
