@@ -26,6 +26,7 @@ import com.gasturah.response.ContentItem
 import com.gasturah.response.PostinganResponse
 import com.gasturah.response.SejarahResponse
 import com.gasturah.ui.main.DetailActivity
+import com.gasturah.ui.profile.SettingActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -103,6 +104,11 @@ class HomeFragment : Fragment() {
                 .circleCrop()
                 .placeholder(imgLoading)
                 .into(profileSection.imgProfile)
+        }
+
+        binding.profileSection.btnSetting.setOnClickListener {
+            val moveToSetting = Intent(this.requireActivity(), SettingActivity::class.java)
+            startActivity(moveToSetting)
         }
 
     }
