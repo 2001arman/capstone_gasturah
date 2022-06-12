@@ -27,7 +27,7 @@ interface ApiService {
     @Multipart
     @POST("recognize.php")
     fun recognize(
-        @Part foto: MultipartBody.Part
+        @Part("foto") profile_picture : RequestBody
     ): Call<RecognizeResponse>
 
     @Multipart
