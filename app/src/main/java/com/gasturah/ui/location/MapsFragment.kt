@@ -89,7 +89,7 @@ class MapsFragment : Fragment() {
         requestLocation()
         bottomSheetLayout   = binding.includeBottomLayout.bottomSheet
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
-        searchArea          = bottomSheetLayout.findViewById(R.id.maps_search_edit)
+        searchArea          = binding.includeBottomLayout.mapsSearchEdit
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireContext())
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
@@ -183,7 +183,7 @@ class MapsFragment : Fragment() {
                     val address = addressList[0]
                     val latLng  = LatLng(address.latitude, address.longitude)
                     mMap.addMarker(MarkerOptions().position(latLng).title(location).snippet(address.getAddressLine(0)))
-                    mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15f))
                 }
             }
         }
