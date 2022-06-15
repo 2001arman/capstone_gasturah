@@ -23,15 +23,15 @@ Download this application to install
     
 ## Authors
 
-##### Android Team
+##### Android Developers
 - [Muhammad Arman Maulana](https://www.github.com/2001arman)
 - [Rubi Ahmad Fauzan](https://www.github.com/Lasteinsa)
 
-#### Machine Learning
+##### Machine Learning
 - [Muhammad Arman Maulana](https://www.github.com/2001arman)
 - [Muhammad Arman Maulana](https://www.github.com/2001arman)
 
-#### Cloud Computing
+##### Cloud Computing
 - [Muhammad Arman Maulana](https://www.github.com/2001arman)
 - [Muhammad Arman Maulana](https://www.github.com/2001arman)
 
