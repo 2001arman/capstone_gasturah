@@ -35,8 +35,3 @@ Download this application to install
 - [Muhammad Arman Maulana](https://www.github.com/2001arman)
 - [Muhammad Arman Maulana](https://www.github.com/2001arman)
 
-
-## Demo
-
-![Gasturah GIF Demo](design/demo.gif)
-
