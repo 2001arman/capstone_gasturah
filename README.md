@@ -1,4 +1,4 @@
-<img src="https://github.com/2001arman/capstone_gasturah/blob/main/design/logo.png" height="180em">
+<img src="https://github.com/2001arman/capstone_gasturah/blob/main/design/logo.png" height="180em"></br>
 # Gasturah (Gas to situs bersejarah)
 “Explore Our Lands of History”
 
