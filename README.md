@@ -28,10 +28,10 @@ Download this application to install
 - [Rubi Ahmad Fauzan](https://www.github.com/Lasteinsa)
 
 ##### Machine Learning
-- [Muhammad Arman Maulana](https://www.github.com/2001arman)
-- [Muhammad Arman Maulana](https://www.github.com/2001arman)
+- [Eko Rahmat Darmawan](https://www.github.com/Echo271)
+- [Reza Kurniawan](https://www.github.com/rezablutizen)
 
 ##### Cloud Computing
-- [Muhammad Arman Maulana](https://www.github.com/2001arman)
-- [Muhammad Arman Maulana](https://www.github.com/2001arman)
+- [Daffa Mafazi](https://www.github.com/SirAIonne)
+- [Farrel Alfarabi](https://www.github.com/FarrelAlfarabi)
 
